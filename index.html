@@ -32,4 +32,112 @@ h1{
   margin-bottom:20px;
 }
 
-.but
+.buttons{
+  position:relative;
+  height:200px;
+}
+
+button{
+  padding:15px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+#yes{
+  background:#ff4d88;
+  color:white;
+}
+
+#no{
+  position:absolute;
+  background:#ddd;
+}
+
+.hearts{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+.heart{
+  position:absolute;
+  font-size:24px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(255,230,240,.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  font-size:40px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="card">
+<h1>Would you be my Valentine's Day<br>special limited edition pibble? 🐶💖</h1>
+
+<div class="buttons">
+<button id="yes">YES 💘</button>
+<button id="no">No 🙃</button>
+</div>
+</div>
+
+<div class="overlay" id="overlay">YAYYYYY 💖</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const overlay = document.getElementById("overlay");
+
+// move the NO button when hovered
+function moveButton(){
+  const x = Math.random() * 300;
+  const y = Math.random() * 150;
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+yesBtn.onclick = () => overlay.style.display="flex";
+
+// floating hearts
+const heartsContainer = document.getElementById("hearts");
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerText="💖";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=4+Math.random()*3+"s";
+  heartsContainer.appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+},500);
+</script>
+
+</body>
+</html>
